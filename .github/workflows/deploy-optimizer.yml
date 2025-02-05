@@ -10,31 +10,31 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
-      - name: Debug Info
-        run: |
-          pwd
-          ls -la
-          cd tools/portfolio-optimizer
-          pwd
-          ls -la
-          cat package.json
-          
-      - name: Install and Build
+
+      - name: Install Dependencies
         working-directory: tools/portfolio-optimizer
         run: |
+          rm -rf node_modules package-lock.json
           npm install
+
+      - name: Build
+        working-directory: tools/portfolio-optimizer
+        run: |
           npm run build
-          
-      - name: Deploy
+          touch dist/.nojekyll
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: tools/portfolio-optimizer/dist
           branch: gh-pages
-          clean: true
+          folder: tools/portfolio-optimizer/dist
+          target-folder: tools/portfolio-optimizer
+          clean-exclude: |
+            .nojekyll
