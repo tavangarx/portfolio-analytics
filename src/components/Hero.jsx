@@ -30,7 +30,7 @@ const Home = () => {
                                 Optimization
                             </h1>
                             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                Professional-grade financial tools powered by advanced algorithms. 
+                                Professional-grade financial tools powered by robust algorithms. 
                                 Transform your investment strategy with data-driven decisions.
                             </p>
                             <div className="flex gap-4 mb-12">
