@@ -28,16 +28,16 @@ const Integrations = () => {
     ];
 
     return (
-        <section className="py-24 bg-gray-50 overflow-hidden">
+        <section className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    transition={{ duration: 0.6 }}
+                    className="text-center max-w-3xl mx-auto mb-16"
                 >
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-3xl font-medium text-gray-900 mb-4">
                         Enterprise Integrations
                     </h2>
                     <p className="text-xl text-gray-600">
@@ -53,59 +53,36 @@ const Integrations = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="w-full min-w-[280px] max-w-sm flex-none snap-center lg:flex-1 bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
+                            className="w-full min-w-[280px] max-w-sm flex-none snap-center lg:flex-1 bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-100"
                         >
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-sm">
-                                    {integration.category}
-                                </span>
-                                <integration.icon className="w-6 h-6 text-blue-600" />
+                            <div className="flex items-center justify-between mb-6">
+                                <div className="p-3 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors">
+                                    <integration.icon className="w-6 h-6 text-blue-500" />
+                                </div>
                             </div>
 
-                            <h3 className="text-lg font-medium text-gray-900 mb-3">
+                            <h3 className="text-xl font-medium text-gray-900 mb-3">
                                 {integration.name}
                             </h3>
 
-                            <p className="text-sm text-gray-600 mb-4">
+                            <p className="text-gray-600 leading-relaxed mb-6">
                                 {integration.description}
                             </p>
 
-                            <ul className="space-y-2 mb-6">
+                            <div className="space-y-3">
                                 {integration.features.map((feature, featureIndex) => (
-                                    <li 
+                                    <div 
                                         key={featureIndex}
                                         className="text-gray-600 flex items-center text-sm"
                                     >
-                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mr-2" />
+                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2" />
                                         {feature}
-                                    </li>
+                                    </div>
                                 ))}
-                            </ul>
-
-                            <motion.a
-                                href="#"
-                                whileHover={{ x: 5 }}
-                                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
-                            >
-                                View Documentation
-                                <ArrowRight className="ml-2 w-4 h-4" />
-                            </motion.a>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-16 text-center"
-                >
-                    <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors duration-200 inline-flex items-center">
-                        Explore All Integrations
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                    </button>
-                </motion.div>
             </div>
         </section>
     );
