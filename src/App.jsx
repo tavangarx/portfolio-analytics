@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Integrations from './components/Integrations';
 import Footer from './components/Footer';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <main className="flex-grow">
         <Hero />
+        <Integrations />
       </main>
       <Footer />
     </div>
