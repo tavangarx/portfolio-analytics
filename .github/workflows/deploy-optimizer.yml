@@ -20,20 +20,23 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'tools/portfolio-optimizer/package-lock.json'
+          # Remove the cache configuration since it's causing issues
           
       - name: Install and Build
         run: |
-          npm ci
+          npm install
           npm run build
           
-      - name: Create .nojekyll file
-        run: touch dist/.nojekyll
-        
+      - name: Prepare deployment
+        run: |
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
+          
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: tools/portfolio-optimizer/dist
-          branch: gh-pages
-          clean: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: tools/portfolio-optimizer/dist
+          destination_dir: tools/portfolio-optimizer
+          enable_jekyll: false
+          force_orphan: true
