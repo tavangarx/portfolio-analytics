@@ -9,10 +9,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tools/portfolio-optimizer
-
     steps:
       - uses: actions/checkout@v3
       
@@ -20,23 +16,25 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          # Remove the cache configuration since it's causing issues
+          
+      - name: Debug Info
+        run: |
+          pwd
+          ls -la
+          cd tools/portfolio-optimizer
+          pwd
+          ls -la
+          cat package.json
           
       - name: Install and Build
+        working-directory: tools/portfolio-optimizer
         run: |
           npm install
           npm run build
           
-      - name: Prepare deployment
-        run: |
-          touch dist/.nojekyll
-          cp dist/index.html dist/404.html
-          
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: tools/portfolio-optimizer/dist
-          destination_dir: tools/portfolio-optimizer
-          enable_jekyll: false
-          force_orphan: true
+          folder: tools/portfolio-optimizer/dist
+          branch: gh-pages
+          clean: true
