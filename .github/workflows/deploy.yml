@@ -15,9 +15,14 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+        cache: 'npm'
 
     - name: Install Dependencies
-      run: npm install
+      run: |
+        npm install
+        npm install @vitejs/plugin-react @types/react @types/react-dom
+        npm install -D tailwindcss postcss autoprefixer
+        npm install @headlessui/react framer-motion lucide-react
 
     - name: Build
       run: npm run build
