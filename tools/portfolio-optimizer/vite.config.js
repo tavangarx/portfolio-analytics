@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/tools/portfolio-optimizer/',
+  base: '/portfolio-analytics/tools/portfolio-optimizer/',  // Updated base path
   build: {
     outDir: 'dist'
   }
