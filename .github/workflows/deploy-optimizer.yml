@@ -14,21 +14,26 @@ jobs:
         working-directory: tools/portfolio-optimizer
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'tools/portfolio-optimizer/package-lock.json'
           
       - name: Install and Build
         run: |
-          npm install
+          npm ci
           npm run build
           
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+        
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
           folder: tools/portfolio-optimizer/dist
-          target-folder: tools/portfolio-optimizer
+          branch: gh-pages
+          clean: true
